@@ -16,7 +16,7 @@
 |------|--------|---------|
 | `.gitignore` | Create | Ignore node_modules, dist, .env |
 | `.dockerignore` | Create | Keep Docker context small |
-| `.prettierrc` | Create | Formatting config (match monorepo style) |
+| `.prettierrc` | Create | Formatting config |
 | `.prettierignore` | Create | Exclude dist, lockfile |
 | `package.json` | Modify | Add `format:check` script |
 | `deploy/docker/Dockerfile` | Modify | Optimize: drop pnpm from runner, copy node_modules |

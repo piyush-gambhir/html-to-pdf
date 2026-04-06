@@ -5,7 +5,7 @@
 
 ## Context
 
-`document-html-pdf` is a standalone HTML → PDF microservice (headless Chromium / puppeteer-core) that the LagyaVisa monorepo calls over HTTP. It mirrors the `document-ocr` sidecar pattern. The codebase works but is missing CI, proper tests, Docker optimizations, and isn't in version control yet.
+`html-to-pdf` is a standalone HTML → PDF microservice (headless Chromium / puppeteer-core). The codebase works but is missing CI, proper tests, Docker optimizations, and isn't in version control yet.
 
 ## Goals
 

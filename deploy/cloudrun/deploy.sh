@@ -12,8 +12,8 @@ set -euo pipefail
 #   gcloud config set project "${GCP_PROJECT_ID}"
 #   gcloud services enable run.googleapis.com artifactregistry.googleapis.com
 #
-#   # Create Artifact Registry repo (if not already created for lagyavisa)
-#   gcloud artifacts repositories create lagyavisa \
+#   # Create Artifact Registry repo
+#   gcloud artifacts repositories create html-to-pdf \
 #     --repository-format=docker --location="${GCP_REGION}" --description="Docker images"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -23,7 +23,7 @@ cd "${ROOT_DIR}"
 GCP_PROJECT_ID="${GCP_PROJECT_ID:-projects-454107}"
 GCP_REGION="${GCP_REGION:-asia-south1}"
 SERVICE_NAME="html-to-pdf"
-REPO="${GCP_REGION}-docker.pkg.dev/${GCP_PROJECT_ID}/lagyavisa/${SERVICE_NAME}"
+REPO="${GCP_REGION}-docker.pkg.dev/${GCP_PROJECT_ID}/html-to-pdf/${SERVICE_NAME}"
 TAG="${REPO}:$(git rev-parse --short HEAD)"
 
 FROM_HUB=0

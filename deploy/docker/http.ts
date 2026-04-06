@@ -28,7 +28,7 @@ function unauthorized(res: ServerResponse) {
 }
 
 /**
- * HTTP server for HTML → PDF (mirrors document-ocr’s deploy/docker/server.py role).
+ * HTTP server for HTML → PDF rendering.
  */
 export function createHttpServer(opts: { apiToken: string | null; port: number }): Promise<Server> {
   const server = createServer(async (req, res) => {
