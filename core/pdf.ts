@@ -33,7 +33,11 @@ export function resolveChromiumPath(): string | null {
   if (fromEnv && existsSync(fromEnv)) {
     return fromEnv;
   }
-  for (const p of ['/usr/bin/chromium', '/usr/bin/chromium-browser', '/usr/bin/google-chrome-stable']) {
+  for (const p of [
+    '/usr/bin/chromium',
+    '/usr/bin/chromium-browser',
+    '/usr/bin/google-chrome-stable',
+  ]) {
     if (existsSync(p)) {
       return p;
     }
@@ -44,7 +48,10 @@ export function resolveChromiumPath(): string | null {
 /**
  * Render a full HTML document string to PDF bytes. No domain logic — any valid HTML works.
  */
-export async function renderHtmlToPdf(html: string, options: RenderPdfOptions = {}): Promise<Buffer> {
+export async function renderHtmlToPdf(
+  html: string,
+  options: RenderPdfOptions = {},
+): Promise<Buffer> {
   const executablePath = resolveChromiumPath();
   if (!executablePath) {
     throw new Error(

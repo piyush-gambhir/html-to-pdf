@@ -1,0 +1,13 @@
+node_modules
+dist
+.git
+.github
+tests
+docs
+.env*
+.gitignore
+.prettierrc
+.prettierignore
+README.md
+LICENSE
+vitest.config.ts

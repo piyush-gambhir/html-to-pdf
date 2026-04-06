@@ -21,7 +21,10 @@ export interface RenderRequestBody {
 }
 
 function unauthorized(res: ServerResponse) {
-  json(res, 401, { error: 'unauthorized', message: 'Invalid or missing Authorization bearer token.' });
+  json(res, 401, {
+    error: 'unauthorized',
+    message: 'Invalid or missing Authorization bearer token.',
+  });
 }
 
 /**
@@ -41,7 +44,10 @@ export function createHttpServer(opts: { apiToken: string | null; port: number }
     if (method === 'GET' && url === '/ready') {
       const chromium = resolveChromiumPath();
       if (!chromium) {
-        json(res, 503, { status: 'not_ready', message: 'Chromium binary not found (set PUPPETEER_EXECUTABLE_PATH).' });
+        json(res, 503, {
+          status: 'not_ready',
+          message: 'Chromium binary not found (set PUPPETEER_EXECUTABLE_PATH).',
+        });
         return;
       }
       res.writeHead(200, { 'Content-Type': 'application/json' });

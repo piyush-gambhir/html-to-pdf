@@ -14,7 +14,8 @@
     "dev": "tsx watch deploy/docker/index.ts",
     "test": "vitest run",
     "test:watch": "vitest",
-    "format": "prettier --write \"core/**/*.ts\" \"deploy/docker/**/*.ts\" \"tests/**/*.ts\""
+    "format": "prettier --write \"core/**/*.ts\" \"deploy/docker/**/*.ts\" \"tests/**/*.ts\"",
+    "format:check": "prettier --check \"core/**/*.ts\" \"deploy/docker/**/*.ts\" \"tests/**/*.ts\""
   },
   "dependencies": {
     "puppeteer-core": "^24.15.0"
