@@ -1,9 +1,9 @@
 {
-  "name": "document-html-pdf",
+  "name": "html-to-pdf",
   "version": "0.1.0",
   "private": true,
   "license": "MIT",
-  "description": "Standalone HTML → PDF microservice (Chromium). Same role as document-ocr: sidecar HTTP API for the monorepo.",
+  "description": "Standalone HTML → PDF microservice powered by headless Chromium.",
   "type": "module",
   "engines": {
     "node": ">=22"

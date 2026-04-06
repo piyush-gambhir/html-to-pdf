@@ -10,4 +10,4 @@ const authHint = apiToken
   : 'No API_TOKEN — open render endpoint (use only on private networks).';
 
 // eslint-disable-next-line no-console
-console.log(`document-html-pdf listening on :${port}. ${authHint}`);
+console.log(`html-to-pdf listening on :${port}. ${authHint}`);

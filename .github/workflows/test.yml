@@ -40,11 +40,11 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Build Docker image
-        run: docker build -f deploy/docker/Dockerfile -t document-html-pdf:ci .
+        run: docker build -f deploy/docker/Dockerfile -t html-to-pdf:ci .
 
       - name: Run integration tests in container
         run: |
-          docker run --rm document-html-pdf:ci node --input-type=module -e "
+          docker run --rm html-to-pdf:ci node --input-type=module -e "
             import { renderHtmlToPdf } from './dist/core/pdf.js';
 
             const pdf = await renderHtmlToPdf('<h1>CI Test</h1>');

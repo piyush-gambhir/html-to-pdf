@@ -35,7 +35,7 @@ describe('HTTP server (no auth)', () => {
     const res = await request('/health');
     expect(res.status).toBe(200);
     const body = await res.json();
-    expect(body).toEqual({ status: 'ok', service: 'document-html-pdf' });
+    expect(body).toEqual({ status: 'ok', service: 'html-to-pdf' });
   });
 
   it('GET / returns 200 (alias for health)', async () => {

@@ -37,7 +37,7 @@ export function createHttpServer(opts: { apiToken: string | null; port: number }
 
     if (method === 'GET' && (url === '/' || url === '/health')) {
       res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ status: 'ok', service: 'document-html-pdf' }));
+      res.end(JSON.stringify({ status: 'ok', service: 'html-to-pdf' }));
       return;
     }
 
