@@ -1,0 +1,68 @@
+name: Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm run build
+
+      - name: Format check
+        run: pnpm run format:check
+
+      - name: Unit + HTTP tests
+        run: pnpm test
+
+  integration:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -f deploy/docker/Dockerfile -t document-html-pdf:ci .
+
+      - name: Run integration tests in container
+        run: |
+          docker run --rm document-html-pdf:ci sh -c "
+            cd /app &&
+            node -e \"
+              const http = require('http');
+              const { renderHtmlToPdf } = require('./dist/core/pdf.js');
+
+              async function main() {
+                const pdf = await renderHtmlToPdf('<h1>CI Test</h1>');
+                if (!pdf.subarray(0, 5).toString('ascii').startsWith('%PDF-')) {
+                  console.error('FAIL: not a valid PDF');
+                  process.exit(1);
+                }
+                if (pdf.length < 100) {
+                  console.error('FAIL: PDF too small:', pdf.length);
+                  process.exit(1);
+                }
+                console.log('PASS: PDF rendered,', pdf.length, 'bytes');
+              }
+
+              main().catch(e => { console.error(e); process.exit(1); });
+            \"
+          "
