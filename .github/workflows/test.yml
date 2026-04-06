@@ -44,25 +44,17 @@ jobs:
 
       - name: Run integration tests in container
         run: |
-          docker run --rm document-html-pdf:ci sh -c "
-            cd /app &&
-            node -e \"
-              const http = require('http');
-              const { renderHtmlToPdf } = require('./dist/core/pdf.js');
+          docker run --rm document-html-pdf:ci node --input-type=module -e "
+            import { renderHtmlToPdf } from './dist/core/pdf.js';
 
-              async function main() {
-                const pdf = await renderHtmlToPdf('<h1>CI Test</h1>');
-                if (!pdf.subarray(0, 5).toString('ascii').startsWith('%PDF-')) {
-                  console.error('FAIL: not a valid PDF');
-                  process.exit(1);
-                }
-                if (pdf.length < 100) {
-                  console.error('FAIL: PDF too small:', pdf.length);
-                  process.exit(1);
-                }
-                console.log('PASS: PDF rendered,', pdf.length, 'bytes');
-              }
-
-              main().catch(e => { console.error(e); process.exit(1); });
-            \"
+            const pdf = await renderHtmlToPdf('<h1>CI Test</h1>');
+            if (pdf.subarray(0, 5).toString('ascii') !== '%PDF-') {
+              console.error('FAIL: not a valid PDF');
+              process.exit(1);
+            }
+            if (pdf.length < 100) {
+              console.error('FAIL: PDF too small:', pdf.length);
+              process.exit(1);
+            }
+            console.log('PASS: PDF rendered,', pdf.length, 'bytes');
           "
