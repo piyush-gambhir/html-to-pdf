@@ -4,3 +4,14 @@ dist/
 .DS_Store
 *.log
 *.tsbuildinfo
+
+# env
+.env
+.env.local
+.env.development
+.env.production
+.env.deploy
+.env.deploy.production
+.env.deploy.development
+!.env.example
+!.env.deploy.example
